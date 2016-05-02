@@ -1,0 +1,92 @@
+
+People[] persons;
+String personN[]= { "Alpha", "Beta", "Gamma", "Delta", 
+  "Epsilon", "Zeta", "Eta", "Theta"};
+int amoPersons= personN.length;
+float horizon;
+void setup() {
+  horizon=height-100;
+  size (800,800);
+  
+    
+
+makepersons();
+}
+  
+  
+  void makepersons() {
+  persons=  new People[amoPersons];
+    float x=10, y=horizon;
+    for (int j=0; j<amoPersons; j++ ) {
+      persons[j]=  new People( personN[j] );
+      x += 90;
+    }
+  }
+
+
+
+
+void draw(){
+  lineup();
+  
+}
+ 
+  class People {
+  float x,y;
+  float w, h;
+  String name="?";
+  float r=random(0,255), g=random(0,255), b=random(0,255);
+  int age;
+  People ( String who ) {
+    age=  int( random(1, 99) );
+    if (age<20) {
+      w=  random( 5+age*2, 5+age*2 );
+      h=  random( 10+age*1, 10+age*2 );
+    } else {
+      w=  random( 20, 50 );
+      h=  random( 50, 100 );
+    }
+    
+    name=  who;
+  }
+
+  //// METHODS  ////
+  // show() -- Display this object.
+  void show( float x, float y ) {
+    fill( r, g, b );
+    rectMode( CENTER );
+    rect( x, y-h/2, w, h );
+    
+    stats( x, y );
+  }
+  void stats( float x, float y ) {
+    // Name, w, h - underneath. //
+    fill(r, g, b);
+    text( name, x-20, y+20 );
+    text( int(w), x, y+35 );
+    text( int(h), x, y+50 );
+    fill(0, 0, 0);              
+    text( name, 2+x-w/2, y-h/2 );
+    text( age, x-5, y+12-h/2 );
+  }
+  
+
+ float pounds() {
+ return (h * w * w) / 500 ;
+ }
+}  
+void lineup() {
+  float x=100, y=horizon;
+  fill( 50 );
+  text( "Weight", 2, horizon+55 );
+  text( "Height", 2, horizon+40 );
+  for (int j=0; j<personN.length; j++ ) {
+    persons[j].show( x, y );
+    x=  x + 75;
+  }
+}
+
+  
+  
+  
+  
